@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.console;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -60,8 +61,18 @@ public class TechJobs {
                 System.out.println("\nSearch term: ");
                 String searchTerm = in.nextLine();
 
+//                ArrayList<String> results = JobData.findAll(searchField);
+//                if (!results.contains(searchTerm)) {
+//                    System.out.println("No matching results.");
+//                }
+
+                ArrayList<HashMap<String, String>> results = JobData.findByValue(searchTerm);
+                if (results.isEmpty()) {
+                    System.out.println("No matching results.");
+                }
+
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -111,6 +122,15 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        for (HashMap<String, String> job : someJobs) {
+                    System.out.print("position type: " + job.get("position type") +
+                            "\nname: " + job.get("name") +
+                            "\nemployer: " + job.get("employer") +
+                            "\nlocation: " + job.get("location") +
+                            "\ncore competency: " + job.get("core competency") +
+                            "\n" +
+                            "\n");
+
+        }
     }
 }

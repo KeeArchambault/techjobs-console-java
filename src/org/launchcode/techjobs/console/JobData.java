@@ -16,6 +16,22 @@ import java.util.List;
  */
 public class JobData {
 
+    public static ArrayList<HashMap<String, String>> findByValue(String searchTerm) {
+
+        loadData();
+
+        ArrayList<HashMap<String, String>> resultJobs = new ArrayList<>();
+
+        for (HashMap<String, String> job : allJobs) {
+            ArrayList<HashMap<String, String>> result = allJobs;
+
+            if (job.containsValue(searchTerm)) {
+                resultJobs.add(job);
+            }
+        }
+        return resultJobs;
+    }
+
     private static final String DATA_FILE = "resources/job_data.csv";
     private static Boolean isDataLoaded = false;
 

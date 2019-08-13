@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class JobData {
 
+
     public static ArrayList<HashMap<String, String>> findByValue(String searchTerm) {
 
         loadData();
@@ -25,14 +26,15 @@ public class JobData {
         for (HashMap<String, String> job : allJobs) {
             ArrayList<HashMap<String, String>> result = allJobs;
 
-            if (job.containsValue(searchTerm)) {
+            if (job.toString().toLowerCase().contains(searchTerm.toLowerCase())) {
                 resultJobs.add(job);
             }
         }
         return resultJobs;
     }
 
-    private static final String DATA_FILE = "resources/job_data.csv";
+    public static final String DATA_FILE = "resources/job_data.csv";
+
     private static Boolean isDataLoaded = false;
 
     private static ArrayList<HashMap<String, String>> allJobs;
@@ -54,7 +56,7 @@ public class JobData {
         for (HashMap<String, String> row : allJobs) {
             String aValue = row.get(field);
 
-            if (!values.contains(aValue)) {
+            if (!values.toString().toLowerCase().contains(aValue.toLowerCase())) {
                 values.add(aValue);
             }
         }
@@ -92,7 +94,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
